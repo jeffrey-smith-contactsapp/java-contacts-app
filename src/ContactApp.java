@@ -42,7 +42,7 @@ public class ContactApp {
                     searchContact();
                     break;
                 case 4:
-                    System.out.println(ui);
+                    deleteContact();
                     break;
                 case 5:
 //                    System.out.println(ui);
@@ -79,9 +79,28 @@ public class ContactApp {
         return fnumber;
     }
 
+    public static void deleteContact(){
+        Contact toRemove = null;
+        System.out.println("Enter name of contact to delete");
+        String isName = scanner.nextLine();
+        for (Contact c : contacts) {
+            if (c.getName().equalsIgnoreCase(isName)){
+             toRemove = c;
+
+            }
+        }
+        if (toRemove == null){
+            System.out.println("invalid name");
+        } else {
+            contacts.remove(toRemove);
+            System.out.println("contact deleted");
+        }
+
+    };
+
     public static void searchContact(){
         boolean isSuccessful = false;
-        System.out.println("Enter name of contact");
+        System.out.println("Enter name of contact to search");
         String theName = scanner.nextLine();
         for (Contact c : contacts) {
             if (c.getName().equalsIgnoreCase(theName)){
