@@ -6,7 +6,7 @@ import java.util.*;
 
 
 public class ContactApp {
-
+    public static final String RED = "\033[0;31m";
     /**
      * TODO:
      * add checks to user input ;; disallow diamonds
