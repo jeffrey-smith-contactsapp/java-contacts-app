@@ -39,7 +39,7 @@ public class ContactApp {
                     addContacts();
                     break;
                 case 3:
-                    System.out.println(ui);
+                    searchContact();
                     break;
                 case 4:
                     System.out.println(ui);
@@ -49,13 +49,16 @@ public class ContactApp {
                     running = false;
                     break;
                 default:
-                    System.out.println(ui);
+                    System.out.println("System Error");
                     break;
             }
-            System.out.println("continue...? (y/n)");
-            if (scanner.nextLine().toLowerCase().equals("n")) {
-                running = false;
+            if (running) {
+                System.out.println("continue...? (y/n)");
+                if (scanner.nextLine().equalsIgnoreCase("n")) {
+                    running = false;
+                }
             }
+            if (!running) System.out.println("Have a nice day");
         }
 
 
@@ -76,7 +79,19 @@ public class ContactApp {
         return fnumber;
     }
 
-    ;
+    public static void searchContact(){
+        boolean isSuccessful = false;
+        System.out.println("Enter name of contact");
+        String theName = scanner.nextLine();
+        for (Contact c : contacts) {
+            if (c.getName().equalsIgnoreCase(theName)){
+                System.out.println(c.getName() + " " + formatNumber(c.getNumber()));
+                isSuccessful = true;
+            }
+        }
+        if (!isSuccessful) System.out.println("Invalid name");
+
+    };
 
     public static void displayContacts() {
         contactFormatter();
