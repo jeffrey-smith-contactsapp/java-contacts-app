@@ -12,12 +12,13 @@ public class ContactApp {
      * add checks to user input ;; disallow diamonds
      */
     protected static final Scanner scanner = new Scanner(System.in);
-//  protected static final HashMap<String, String> contacts = new HashMap<>();
+    //  protected static final HashMap<String, String> contacts = new HashMap<>();
     protected static final List<Contact> contacts = new ArrayList<>();
 
 
     private static final String fileName = "contacts.txt";
     private static final Path filePath = Paths.get("src", fileName);
+
     public static void main(String[] args) {
         validateFile();
         loadContacts();
@@ -45,14 +46,14 @@ public class ContactApp {
                     break;
                 case 5:
 //                    System.out.println(ui);
-                    running=false;
+                    running = false;
                     break;
                 default:
                     System.out.println(ui);
                     break;
             }
             System.out.println("continue...? (y/n)");
-            if(scanner.nextLine().toLowerCase().equals("n")){
+            if (scanner.nextLine().toLowerCase().equals("n")) {
                 running = false;
             }
         }
@@ -61,48 +62,50 @@ public class ContactApp {
 //        contacts.put(get,"7028888888");
 //        System.out.println(contacts);
     }
-    public String formatNumber(String num){
-        String fnumber = num;
-        if (num.length()== 7){
-            fnumber = num.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
-        } else if (num.length()==10){
-            fnumber = num.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
-        } else if (num.length() > 10){
 
-            fnumber ="+" + num.substring(0,num.length()-10) + " " + num.substring(num.length()-10).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
-        } else if (num.length() > 13){
+    public String formatNumber(String num) {
+        String fnumber = num;
+        if (num.length() == 7) {
+            fnumber = num.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
+        } else if (num.length() == 10) {
+            fnumber = num.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+        } else if (num.length() > 10) {
+
+            fnumber = "+" + num.substring(0, num.length() - 10) + " " + num.substring(num.length() - 10).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+        } else if (num.length() > 13) {
             fnumber = "sorry this number input is incorrect";
         }
         return fnumber;
-    };
-
-    public static void displayContacts(){
-        System.out.println(contacts);
     }
 
-    private static void validateFile(){
+    ;
+
+    public static void displayContacts() {
+        contactFormatter();
+    }
+
+    private static void validateFile() {
 //        System.out.println("ddd");
-        if(!Files.exists(filePath)){
+        if (!Files.exists(filePath)) {
             try {
                 Files.createFile(filePath);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
 
-    public static void loadContacts(){
+    public static void loadContacts() {
 //        System.out.println();
         contacts.clear();
         List<String> newList = new ArrayList<>();
         try {
             newList = Files.readAllLines(filePath);
-        } catch (IOException iox){
+        } catch (IOException iox) {
             iox.printStackTrace();
         }
 //        System.out.println(newList);
-        if(newList.size() > 1) {
+        if (newList.size() >= 1) {
             for (String s : newList) {
                 String[] arr = s.split("◈");
                 Contact c = new Contact(arr[0], arr[1]);
@@ -112,21 +115,20 @@ public class ContactApp {
     }
 
 
-    public static void saveContacts()  {
+    public static void saveContacts() {
         List<String> contactString = new ArrayList<>();
-        for(Contact c : contacts){
+        for (Contact c : contacts) {
             String s = c.getName() + "◈" + c.getNumber();
             contactString.add(s);
         }
         try {
             Files.write(filePath, contactString);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public static void addContacts(){
+    public static void addContacts() {
 //        Contact c = new Contact("namee","1234567890");
 //        contacts.add(c);
 
@@ -134,51 +136,24 @@ public class ContactApp {
         String uName = scanner.nextLine();
         System.out.println("Enter Number...");
         String uNumber = scanner.nextLine();
-        Contact c = new Contact(uName,uNumber);
+        Contact c = new Contact(uName, uNumber);
         contacts.add(c);
 
         saveContacts();
 
+    }
 
-//        String uName = null;
-//        String uNumber = null;
-//        boolean isNameGood = false;
-//        boolean isNumberGood = false;
-//        while (!isNameGood){
-//            System.out.println("Enter Name...");
-//            uName = scanner.nextLine();
-//            if(uName.length() == 0){
-//                System.out.println("Please enter a name!");
-//            }else {
-//                isNameGood = true;
-//            }
-//        }
-//
-//        while (!isNumberGood){
-//            System.out.println("Enter Number...");
-//            uNumber = scanner.nextLine();
-//            if(uNumber.length() == 0){
-//                System.out.println("Please enter a number!");
-//            } else if (uNumber.length() > 13) {
-//                System.out.println("Number too long!");
-//                /**
-//                 * TODO:
-//                 * Check for numbers only
-//                 */
-//            } else {
-//                isNumberGood = true;
-//            }
-//
-//        }
-//
-//        contacts.put(uName,uNumber);
-//
-//        System.out.println("src.Contact added!");
-
+    public static void contactFormatter() {
+        System.out.println("------------------------------------");
+        System.out.printf("|%-15s|%-18s|%n", "Name","Phone Number");
+        System.out.println("------------------------------------");
+        for (Contact c : contacts) {
+            System.out.printf("|%-15s|%-18s|%n", c.getName(), c.getNumber());
+        }
+        ;
+        System.out.println("------------------------------------");
 
 
     }
-
-
 
 }
