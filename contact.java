@@ -5,9 +5,17 @@ public class contact {
     private String number;
 //    private HashMap<String, Integer> list;
 
-    public contact(String name, String number){
-        this.name = name;
-        this.number = formatNumber(number);
+//    public contact(String name, String number){
+//        this.name = name;
+//        this.number = formatNumber(number);
+//    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getNumber() {
+        return this.number;
     }
 
     public String formatNumber(String num){
