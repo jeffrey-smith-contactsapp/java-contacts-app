@@ -1,14 +1,14 @@
-import java.util.HashMap;
+package src;
 
-public class contact {
+public class Contact {
     private String name;
     private String number;
 //    private HashMap<String, Integer> list;
 
-//    public contact(String name, String number){
-//        this.name = name;
-//        this.number = formatNumber(number);
-//    }
+    public Contact(String name, String number){
+        this.name = name;
+        this.number = formatNumber(number);
+    }
 
     public String getName() {
         return this.name;
