@@ -63,7 +63,7 @@ public class ContactApp {
 //        System.out.println(contacts);
     }
 
-    public String formatNumber(String num) {
+    public  static String formatNumber(String num) {
         String fnumber = num;
         if (num.length() == 7) {
             fnumber = num.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
@@ -72,8 +72,6 @@ public class ContactApp {
         } else if (num.length() > 10) {
 
             fnumber = "+" + num.substring(0, num.length() - 10) + " " + num.substring(num.length() - 10).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
-        } else if (num.length() > 13) {
-            fnumber = "sorry this number input is incorrect";
         }
         return fnumber;
     }
@@ -129,17 +127,19 @@ public class ContactApp {
     }
 
     public static void addContacts() {
-//        Contact c = new Contact("namee","1234567890");
-//        contacts.add(c);
-
         System.out.println("Enter Name...");
         String uName = scanner.nextLine();
         System.out.println("Enter Number...");
         String uNumber = scanner.nextLine();
-        Contact c = new Contact(uName, uNumber);
-        contacts.add(c);
+        if (uName.length() > 0 && uNumber.length() > 6 && uNumber.length() <= 14){
+            Contact c = new Contact(uName, uNumber);
+            contacts.add(c);
 
-        saveContacts();
+            saveContacts();
+        } else {
+            System.out.println("Please enter a valid input");
+        }
+
 
     }
 
@@ -148,7 +148,7 @@ public class ContactApp {
         System.out.printf("|%-15s|%-18s|%n", "Name","Phone Number");
         System.out.println("------------------------------------");
         for (Contact c : contacts) {
-            System.out.printf("|%-15s|%-18s|%n", c.getName(), c.getNumber());
+            System.out.printf("|%-15s|%-18s|%n", c.getName(),formatNumber(c.getNumber()));
         }
         ;
         System.out.println("------------------------------------");
