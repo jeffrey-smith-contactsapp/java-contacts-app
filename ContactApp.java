@@ -5,33 +5,36 @@ public class ContactApp {
   protected static final Scanner scanner = new Scanner(System.in);
   protected static final HashMap<String, String> contacts = new HashMap<>();
     public static void main(String[] args) {
+        boolean running = true;
         loadContacts();
+        while (running) {
+            System.out.printf("1. View contacts.\n2. Add a new contact.\n3. Search a contact by name.\n4. Delete an existing contact.\n5. Exit.\nEnter an option (1, 2, 3, 4 or 5):\n");
 
-        System.out.printf("1. View contacts.\n2. Add a new contact.\n3. Search a contact by name.\n4. Delete an existing contact.\n5. Exit.\nEnter an option (1, 2, 3, 4 or 5):\n");
-
-        int ui = scanner.nextInt();
-        scanner.nextLine();
-        switch (ui) {
-            case 1:
+            int ui = scanner.nextInt();
+            scanner.nextLine();
+            switch (ui) {
+                case 1:
 //                System.out.println(ui);
-                displayContacts();
-                break;
-            case 2:
+                    displayContacts();
+                    break;
+                case 2:
 //                System.out.println(ui);
-                addContacts();
-                break;
-            case 3:
-                System.out.println(ui);
-                break;
-            case 4:
-                System.out.println(ui);
-                break;
-            case 5:
-                System.out.println(ui);
-                break;
-            default:
-                System.out.println(ui);
-                break;
+                    addContacts();
+                    break;
+                case 3:
+                    System.out.println(ui);
+                    break;
+                case 4:
+                    System.out.println(ui);
+                    break;
+                case 5:
+//                    System.out.println(ui);
+                    running=false;
+                    break;
+                default:
+                    System.out.println(ui);
+                    break;
+            }
         }
 //        contacts.put(get,"7028888888");
 //        System.out.println(contacts);
@@ -58,22 +61,27 @@ public class ContactApp {
     public static void loadContacts(){
 
     }
-    public static void addContacts(){
 
+
+
+    public static void addContacts(){
+        String uName = null;
+        String uNumber = null;
         boolean isNameGood = false;
+        boolean isNumberGood = false;
         while (!isNameGood){
             System.out.println("Enter Name...");
-            String uName = scanner.nextLine();
+            uName = scanner.nextLine();
             if(uName.length() == 0){
                 System.out.println("Please enter a name!");
             }else {
                 isNameGood = true;
             }
         }
-        boolean isNumberGood = false;
+
         while (!isNumberGood){
             System.out.println("Enter Number...");
-            String uNumber = scanner.nextLine();
+            uNumber = scanner.nextLine();
             if(uNumber.length() == 0){
                 System.out.println("Please enter a number!");
             } else if (uNumber.length() > 13) {
@@ -87,6 +95,8 @@ public class ContactApp {
             }
 
         }
+
+        contacts.put(uName,uNumber);
 
         System.out.println("Contact added!");
 
