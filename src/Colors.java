@@ -1,6 +1,6 @@
 package src;
 
-public interface colors {
+public interface Colors {
      // Reset
       String RESET = "\033[0m";  // Text Reset
 

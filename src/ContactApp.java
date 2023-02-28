@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 
-public class ContactApp implements colors{
+public class ContactApp implements Colors {
     private static final Scanner scanner = new Scanner(System.in);
     protected static final List<Contact> contacts = new ArrayList<>();
     private static final Path filePath = Paths.get("src", "contacts.txt");
