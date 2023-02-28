@@ -11,6 +11,10 @@ public class ContactApp implements Colors {
     public static void main(String[] args) {
         validateFile();
         loadContacts();
+        runApp();
+    }
+
+    public static void runApp(){
         boolean running = true;
 
         while (running) {
@@ -50,7 +54,7 @@ public class ContactApp implements Colors {
 
     public static void deleteContact(){
         Contact toRemove = null;
-        System.out.printf("%sEnter name of contact to delete%s%n",RED,RESET);
+        System.out.printf("%sEnter name of contact to delete%s%n",RED_BRIGHT,RESET);
         String isName = scanner.nextLine();
         for (Contact c : contacts) {
             if (c.getName().equalsIgnoreCase(isName)){
@@ -185,13 +189,13 @@ public class ContactApp implements Colors {
     }
 
     public static void contactFormatter() {
-        System.out.println("┌───────────────┬───────────────────┐");
-        System.out.printf("│%-15s│%-19s│%n", "Name","Phone Number");
-        System.out.println("┝━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━┥");
+        System.out.println("┌───────────────────┬───────────────────┐");
+        System.out.printf("│%-19s│%-19s│%n", "Name","Phone Number");
+        System.out.println("┝━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━┥");
         for (Contact c : contacts) {
-            System.out.printf("│%s%-15s%s│%s%-19s%s│%n", YELLOW,c.getName(),RESET,YELLOW,formatNumber(c.getNumber()),RESET);
+            System.out.printf("│%s%-19s%s│%s%-19s%s│%n", YELLOW,c.getName(),RESET,YELLOW,formatNumber(c.getNumber()),RESET);
         }
-        System.out.println("└───────────────┴───────────────────┘");
+        System.out.println("└───────────────────┴───────────────────┘");
     }
 
 }
